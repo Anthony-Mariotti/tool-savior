@@ -1,37 +1,17 @@
 package com.anthonymariotti.toolsavior.mixins;
 
 import com.anthonymariotti.toolsavior.interfaces.mixins.ISaviorAnvilModification;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import com.anthonymariotti.toolsavior.utilities.SaviorLogger;
 import net.minecraft.screen.AnvilScreenHandler;
-import net.minecraft.screen.Property;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Map;
 
 @Mixin(AnvilScreenHandler.class)
 public abstract class SaviorAnvilScreenHandlerModification implements ISaviorAnvilModification {
-    private static final Logger TSLOGGER = LoggerFactory.getLogger("ToolSavior");
-
-    @Shadow
-    private Property levelCost;
-
-    @Shadow
-    private int repairItemUsage;
-
-    private Boolean isEnchantment;
-
     @Inject(
             method = "updateResult()V",
             at = @At(
@@ -41,12 +21,12 @@ public abstract class SaviorAnvilScreenHandlerModification implements ISaviorAnv
             )
     )
     public void isRepairing(CallbackInfo info) {
-        TSLOGGER.info("Testing");
+        SaviorLogger.info("Testing");
     }
 
     @Overwrite
     public static int getNextCost(int cost) {
-        TSLOGGER.info("getNextCost Called");
+        SaviorLogger.info("getNextCost Called");
         // TODO: Do testing to determine if this is working as intended.
         return 0;
     }
