@@ -7,7 +7,10 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+ext.release = false
+def internalVersion = project.mod_version
+
+version = "$internalVersion${getBuildVersion()}"
 group = project.maven_group
 
 repositories {
@@ -51,6 +54,10 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = 17
 }
 
+tasks.register("release") {
+    release = true
+}
+
 java {
     // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
     // if it is present.
@@ -79,4 +86,21 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+}
+
+def getBuildVersion() {
+    // Release does not contain a build number
+    if (release) {
+        return ""
+    }
+
+    var buildId = System.getenv("GITHUB_RUN_NUMBER")
+
+    // Only include build number in CI builds
+    if (buildId != null) {
+        return "+build.$buildId"
+    }
+
+    // Not able to provide build information
+    return ""
 }
