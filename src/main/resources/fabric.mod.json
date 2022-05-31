@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "toolsavior",
+  "version": "${version}",
+
+  "name": "Tool Savior",
+  "description": "Save your tools from destruction by repairing them!",
+  "authors": [
+    "Anthony Mariotti"
+  ],
+  "contact": {
+    "homepage": "https://github.com/AMTraxTGE/tool-savior/wiki",
+    "sources": "https://github.com/AMTraxTGE/tool-savior",
+    "issues": "https://github.com/AMTraxTGE/tool-savior/issues"
+  },
+
+  "license": "GNU GPLv3",
+  "icon": "assets/toolsavior/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "server": [
+      "com.anthonymariotti.toolsavior.ToolSavior"
+    ]
+  },
+  "mixins": [
+    "toolsavior.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.18.2",
+    "java": ">=17"
+  },
+  "suggests": {}
+}
